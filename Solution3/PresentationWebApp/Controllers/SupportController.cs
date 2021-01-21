@@ -19,6 +19,9 @@ namespace PresentationWebApp.Controllers
         {
             //inform the responsible staff
 
+            if (string.IsNullOrEmpty(query))
+                ViewData["warning"] = "type in some question";
+            else
             ViewData["feedback"] = "Thank you for getting in touch with us. We will answer back asap";
 
             return View();
