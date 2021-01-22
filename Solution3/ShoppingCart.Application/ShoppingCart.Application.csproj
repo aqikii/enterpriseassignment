@@ -18,7 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\ShoppingCart.Data\ShoppingCart.Data.csproj" />
+    <ProjectReference Include="..\ShoppingCart.Domain\ShoppingCart.Domain.csproj" />
   </ItemGroup>
 
 </Project>
