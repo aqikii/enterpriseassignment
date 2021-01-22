@@ -1,4 +1,5 @@
-﻿using ShoppingCart.Data.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoppingCart.Data.Context;
 using ShoppingCart.Domain.Interfaces;
 using ShoppingCart.Domain.Models;
 using System;
@@ -36,7 +37,7 @@ namespace ShoppingCart.Data.Repositories
         public Product GetProduct(Guid id)
         {
             //will return ONE product for id found
-            return _context.Products.SingleOrDefault(x => x.Id == id);
+            return _context.Products.Include(x=>x.Category).SingleOrDefault(x => x.Id == id);
         }
 
         public IQueryable<Product> GetProducts()

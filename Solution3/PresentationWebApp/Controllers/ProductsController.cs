@@ -21,5 +21,11 @@ namespace PresentationWebApp.Controllers
 
             return View(list);
         }
+
+        public IActionResult Details(Guid id)
+        {
+            var p = _productsService.GetProduct(id);
+            return View(p);
+        }
     }
 }
