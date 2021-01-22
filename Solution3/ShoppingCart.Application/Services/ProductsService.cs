@@ -6,6 +6,7 @@ using System.Linq;
 using ShoppingCart.Application.ViewModels;
 using ShoppingCart.Data.Repositories;
 using ShoppingCart.Domain.Interfaces;
+using ShoppingCart.Domain.Models;
 
 namespace ShoppingCart.Application.Services
 {
@@ -16,6 +17,42 @@ namespace ShoppingCart.Application.Services
         {
             _productsRepo = productsRepository;
         }
+
+        public void AddProduct(ProductViewModel product)
+        { //automapper
+            Product newProduct = new Product()
+            {
+
+                Description = product.Description,
+                Name = product.Name,
+                Price = product.Price,
+                CategoryId = product.Category.Id,
+                ImageUrl = product.ImageUrl
+            };
+
+
+            newProduct.Name = product.Name;
+            _productsRepo.AddProduct(newProduct);
+        }
+
+        public void DeleteProduct(Guid id)
+        {
+            var pToDelete = _productsRepo.GetProduct(id);
+            if (pToDelete != null)
+            {
+                _productsRepo.DeleteProduct(pToDelete);
+            }
+        }
+
+        /* public void DisableProduct(Guid id)
+         {
+            var pToDisable = _productsRepo.GetProduct(id);
+             if (pToDisable is not disabled)
+             {
+                 _productsRepo.Disableproduct(pToDisable); not official pls chekc code (written from lesson 10)
+             }
+             throw new NotImplementedException();
+         }*/
 
         public ProductViewModel GetProduct(Guid id)
         {

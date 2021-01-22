@@ -16,14 +16,21 @@ namespace ShoppingCart.IOC
     {
         public static void RegisterServices(IServiceCollection services, string connectionString)
         {
+
+            services.AddDbContext<ShoppingCartDbContext>(options =>
+               options.UseSqlServer(connectionString)
+               );
+
+
             services.AddScoped<IProductsRepository, ProductsRepository>();
             services.AddScoped<IProductsService, ProductsService>();
 
-            services.AddDbContext<ShoppingCartDbContext>(options =>
-                options.UseSqlServer(connectionString)
-                );
+            services.AddScoped<ICategoriesRepository, CategoriesRepository>();
+            services.AddScoped<ICategoriesService, CategoriesService>();
 
-            //explain addscoped
+
+
+            
         }
     }
 }
