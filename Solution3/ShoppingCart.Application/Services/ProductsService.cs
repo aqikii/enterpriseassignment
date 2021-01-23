@@ -8,6 +8,7 @@ using ShoppingCart.Data.Repositories;
 using ShoppingCart.Domain.Interfaces;
 using ShoppingCart.Domain.Models;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace ShoppingCart.Application.Services
 {
@@ -23,7 +24,7 @@ namespace ShoppingCart.Application.Services
 
         public void AddProduct(ProductViewModel product)
         { //automapper
-            Product newProduct = new Product()
+            /*Product newProduct = new Product()
             {
 
                 Description = product.Description,
@@ -36,7 +37,10 @@ namespace ShoppingCart.Application.Services
 
             newProduct.Name = product.Name;
 
-            _productsRepo.AddProduct(newProduct);
+            _productsRepo.AddProduct(newProduct);*/
+            var myProduct = _mapper.Map<Product>(product);
+            myProduct.Category = null;
+            _productsRepo.AddProduct(myProduct);
         }
 
         public void DeleteProduct(Guid id)
@@ -61,7 +65,13 @@ namespace ShoppingCart.Application.Services
         public ProductViewModel GetProduct(Guid id)
         {
             //automapper
+
+            
+
             var myProduct = _productsRepo.GetProduct(id);
+            var result = _mapper.Map<ProductViewModel>(myProduct);
+            return result;
+            /*
             ProductViewModel myModel = new ProductViewModel();
             myModel.Description = myProduct.Description;
             myModel.ImageUrl = myProduct.ImageUrl;
@@ -73,16 +83,16 @@ namespace ShoppingCart.Application.Services
                 Id = myProduct.Category.Id,
                 Name = myProduct.Category.Name
             };
-            return myModel;
+            return myModel;*/
         }
 
         public IQueryable<ProductViewModel> GetProducts()
         {
             //check whether automapper works
 
-            var products = _productsRepo.GetProducts();
-            var result = _mapper.Map<IQueryable<Product>, IQueryable<ProductViewModel>>(products);
-            return result;
+            var products = _productsRepo.GetProducts().ProjectTo<ProductViewModel>(_mapper.ConfigurationProvider);
+            
+            return products;
             
             
             
