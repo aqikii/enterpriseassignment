@@ -17,8 +17,7 @@ namespace PresentationWebApp.Controllers
         [HttpPost]
         public IActionResult Contact(string email, string query)
         {
-            //inform the responsible staff
-
+            //put this in partial view
             if (string.IsNullOrEmpty(query))
             TempData["warning"] = "type in some question";
             else

@@ -1,0 +1,33 @@
+﻿@foreach (var p in Model)
+{
+    if(p.Disable == false || (User.IsInRole("Admin")))
+    {
+    <div class="col-4">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top image" src="@p.ImageUrl" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@p.Name</h5>
+                <p class="card-text">€@p.Price</p>
+                <a href="/Products/Details?id=@p.Id" class="btn btn-primary">View Details</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a href="/Products/Delete?id=@p.Id" class="btn btn-danger">Delete</a>
+                    <p class="card-text">Hidden: @p.Disable</p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm">
+                                <a href="/Products/Disable?id=@p.Id" class="btn btn-sm btn-primary">Hide</a>
+                            </div>
+                            <div class="col-sm">
+                                <a href="/Products/Enable?id=@p.Id" class="btn btn-sm btn-primary">Show</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                }
+            </div>
+        </div>
+    </div>
+    }
+}

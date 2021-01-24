@@ -27,8 +27,7 @@ namespace ShoppingCart.Domain.Models
 
         public string ImageUrl { get; set; }
 
-        public int Stock { get; set; } 
-
+        public int Stock { get; set; }
         [DefaultValue(false)]
         public bool Disable { get; set; }
     }

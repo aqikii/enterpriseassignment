@@ -30,6 +30,13 @@ namespace PresentationWebApp.Controllers
             return View(list);
         }
 
+        public IActionResult Search(string keyword)
+        {
+            var list = _productsService.GetProducts(keyword);
+            return View("Index", list);
+        }
+
+
         public IActionResult Details(Guid id)
         {
             var p = _productsService.GetProduct(id);
@@ -88,6 +95,36 @@ namespace PresentationWebApp.Controllers
             }catch(Exception ex)
             {
                 TempData["warning"] = "Product was not deleted"; //change from viewdata to tempdata
+            }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Disable(Guid id)
+        {
+            try
+            {
+
+                _productsService.Disable(id);
+                TempData["feedback"] = "Product was Disabled";
+            }
+            catch (Exception ex)
+            {
+                TempData["warning"] = "Product was not disabled"; //change from viewdata to tempdata
+            }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Enable(Guid id)
+        {
+            try
+            {
+
+                _productsService.Enable(id);
+                TempData["feedback"] = "Product was Enabled";
+            }
+            catch (Exception ex)
+            {
+                TempData["warning"] = "Product was not enabled"; //change from viewdata to tempdata
             }
             return RedirectToAction("Index");
         }

@@ -5,29 +5,35 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Products Catalogue</h1>
+@if (User.IsInRole("Admin"))
+{
+<div class="row">
+    <h1>Products Catalogue</h1>
+    
+    <a class="btn btn-success ml-5 col-10" href="/Products/create" role="button">Add Product</a>
+    <br>
+</div>
+}
+
+<div class="container mt-4">
+    @Html.Partial("SearchPartial")
+</div>
+
+
 
 <div class="container">
     <div class="row">
 
-        @foreach (var p in Model)
-        {
-        <div class="col-4">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top image" src="@p.ImageUrl" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">@p.Name</h5>
-                    <p class="card-text">€@p.Price</p>
-                    <a href="/Products/Details?id=@p.Id" class="btn btn-primary">View Details</a>
-                    @if (User.IsInRole("Admin"))
-                    {
-                    <a href="/Products/Delete?id=@p.Id" class="btn btn-danger">Delete</a>
-                    }
-                </div>
-            </div>
-        </div>
+
+
+        
+        
+        @Html.Partial("ViewProductsPartial")
+        
             
-        }
+
+
+
 
     </div>
 </div>

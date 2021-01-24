@@ -34,12 +34,23 @@ namespace ShoppingCart.Data.Repositories
             _context.SaveChanges();
         }
 
-        public void DisableProduct(Guid id)
+        public void Disable(Guid id)
         {
             var p = GetProduct(id);
             p.Disable = true;
             _context.SaveChanges();
         }
+
+        public void Enable(Guid id)
+        {
+            var p = GetProduct(id);
+            p.Disable = false;
+            _context.SaveChanges();
+        }
+
+
+
+
 
         public Product GetProduct(Guid id)
         {
