@@ -87,21 +87,27 @@ namespace PresentationWebApp.Controllers
 
         public IActionResult Delete(Guid id)
         {
-            try
+            if (User.IsInRole("Admin"))
             {
+                try
+                {
 
-                _productsService.DeleteProduct(id);
-                TempData["feedback"] = "Product was deleted";
-            }catch(Exception ex)
-            {
-                TempData["warning"] = "Product was not deleted"; //change from viewdata to tempdata
-            }
+                    _productsService.DeleteProduct(id);
+                    TempData["feedback"] = "Product was deleted";
+                }
+                catch (Exception ex)
+                {
+                    TempData["warning"] = "Product was not deleted"; //change from viewdata to tempdata
+                }
+            }else TempData["warning"] = "Product was not deleted";
             return RedirectToAction("Index");
         }
 
         public IActionResult Disable(Guid id)
         {
-            try
+            if (User.IsInRole("Admin"))   
+         { 
+                try
             {
 
                 _productsService.Disable(id);
@@ -111,21 +117,25 @@ namespace PresentationWebApp.Controllers
             {
                 TempData["warning"] = "Product was not disabled"; //change from viewdata to tempdata
             }
+        }else TempData["warning"] = "Product was not disabled";
             return RedirectToAction("Index");
         }
 
         public IActionResult Enable(Guid id)
         {
-            try
+            if (User.IsInRole("Admin"))
             {
+                try
+                {
 
-                _productsService.Enable(id);
-                TempData["feedback"] = "Product was Enabled";
-            }
-            catch (Exception ex)
-            {
-                TempData["warning"] = "Product was not enabled"; //change from viewdata to tempdata
-            }
+                    _productsService.Enable(id);
+                    TempData["feedback"] = "Product was Enabled";
+                }
+                catch (Exception ex)
+                {
+                    TempData["warning"] = "Product was not enabled"; //change from viewdata to tempdata
+                }
+            }else TempData["warning"] = "Product was not enabled";
             return RedirectToAction("Index");
         }
     }
