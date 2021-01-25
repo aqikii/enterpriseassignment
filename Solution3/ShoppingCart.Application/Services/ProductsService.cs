@@ -67,7 +67,7 @@ namespace ShoppingCart.Application.Services
 
         public IQueryable<ProductViewModel> GetProducts()
         {
-            //check whether automapper works
+         
 
             var products = _productsRepo.GetProducts().ProjectTo<ProductViewModel>(_mapper.ConfigurationProvider);
             
@@ -77,7 +77,7 @@ namespace ShoppingCart.Application.Services
 
         public IQueryable<ProductViewModel> GetProducts(string keyword)
         {
-            //check whether automapper works
+         
 
             var products = _productsRepo.GetProducts().Where(x=>x.Description.Contains(keyword) || x.Name.Contains(keyword))
                 .ProjectTo<ProductViewModel>(_mapper.ConfigurationProvider);

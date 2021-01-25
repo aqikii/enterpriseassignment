@@ -38,14 +38,32 @@ namespace PresentationWebApp.Controllers
 
         public IActionResult Laptops()
         {
-            var list = _productsService.GetProducts().Where(x => x.CategoryId == 1);
-            return View("Index", list);
+            try
+            {
+                //var list = _productsService.GetProducts().Where(x => x.Category.Id == 1); Please check returns null
+                var list = _productsService.GetProducts();
+                TempData["warning"] = "Could not sort by Laptops";
+                return View("Index", list);
+            }catch(Exception ex)
+            {
+                TempData["warning"] = "Could not sort by Laptops";
+                return View("Index");
+
+            }
         }
 
         public IActionResult Appliances()
         {
-            var list = _productsService.GetProducts().Where(x => x.CategoryId == 2); ;
-            return View("Index", list);
+            try {
+                //var list = _productsService.GetProducts().Where(x => x.Category.Id == 2); Please check returns null
+                TempData["warning"] = "Could not sort by appliances";
+                var list = _productsService.GetProducts();
+                return View("Index", list);
+            } catch(Exception ex)
+            {
+                TempData["warning"] = "Could not sort by appliances";
+                return View("Index");
+            }
         }
 
 
@@ -90,7 +108,7 @@ namespace PresentationWebApp.Controllers
             }catch(Exception ex)
             {
                 //errorr
-                TempData["warning"] = "Product was not added";
+                TempData["warning"] = ex;
             }
             var listOfCategories = _categoriesService.GetCategories();
             ViewBag.Categories = listOfCategories;
