@@ -7,18 +7,19 @@
 
 @if (User.IsInRole("Admin"))
 {
-<div class="row">
-    <h1>Products Catalogue</h1>
+    <div class="row">
+        <h1>Products Catalogue</h1>
 
-    <a class="btn btn-success ml-5 col-10" href="/Products/create" role="button">Add Product</a>
-    <br>
-   
+        <a class="btn btn-success ml-5 col-10" href="/Products/create" role="button">Add Product</a>
+        <br>
 
-</div>
-<div class="row mt-2">
-    <a class="btn btn-warning mt-2" href="/Products/Laptops" role="button">Laptops</a>
-    <a class="btn btn-warning mt-2 ml-5" href="/Products/Appliances" role="button">Appliances</a>
-</div>
+
+    </div>
+    <!--
+    <div class="row mt-2">
+        <a class="btn btn-warning mt-2" href="/Products/Laptops" role="button">Laptops</a>
+        <a class="btn btn-warning mt-2 ml-5" href="/Products/Appliances" role="button">Appliances</a>
+    </div>-->
 }
 
 <div class="container mt-4">
