@@ -36,6 +36,18 @@ namespace PresentationWebApp.Controllers
             return View("Index", list);
         }
 
+        public IActionResult Laptops()
+        {
+            var list = _productsService.GetProducts().Where(x => x.CategoryId == 1);
+            return View("Index", list);
+        }
+
+        public IActionResult Appliances()
+        {
+            var list = _productsService.GetProducts().Where(x => x.CategoryId == 2); ;
+            return View("Index", list);
+        }
+
 
         public IActionResult Details(Guid id)
         {
@@ -133,7 +145,7 @@ namespace PresentationWebApp.Controllers
                 }
                 catch (Exception ex)
                 {
-                    TempData["warning"] = "Product was not enabled"; //change from viewdata to tempdata
+                    TempData["warning"] = "Product was not enabled"; 
                 }
             }else TempData["warning"] = "Product was not enabled";
             return RedirectToAction("Index");

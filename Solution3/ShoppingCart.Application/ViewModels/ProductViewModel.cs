@@ -26,6 +26,8 @@ namespace ShoppingCart.Application.ViewModels
 
         public string ImageUrl { get; set; }
 
+        public int CategoryId { get; set; }
+
         public bool Disable { get; set; }
 
     }
